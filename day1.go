@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 )
 
@@ -24,16 +25,13 @@ func main() {
 	elfCount := 0
 	elfSum := 0
 
-	currentMax := 0
+	var elfSums []int
 
 	for fileScanner.Scan() {
 		x := fileScanner.Text()
 
 		if x == "" {
-			if elfSum > currentMax {
-				currentMax = elfSum
-			}
-			fmt.Println("elf", elfCount, "sum", elfSum)
+			elfSums = append(elfSums, elfSum)
 			elfSum = 0
 			elfCount++
 		} else {
@@ -44,8 +42,20 @@ func main() {
 		}
 	}
 
-	// print max elfSum
-	fmt.Println("max", currentMax)
+	// extract the 3 largest values.
+	sort.Ints(elfSums)
+	length := len(elfSums)
+	subset := elfSums[length-3 : length]
+
+	fmt.Println("top 3 elves", subset)
+
+	// sum the subset.
+	sum := 0
+	for _, v := range subset {
+		sum += v
+	}
+
+	fmt.Println("total", sum)
 
 	readFile.Close()
 }
