@@ -14,7 +14,7 @@ func check(e error) {
 	}
 }
 
-func main() {
+func day1() {
 	readFile, err := os.Open("input.txt")
 	check(err)
 
@@ -58,4 +58,8 @@ func main() {
 	fmt.Println("total", sum)
 
 	readFile.Close()
+}
+
+func main() {
+	day1()
 }
