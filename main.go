@@ -69,10 +69,10 @@ func day1() {
 	fmt.Println("total", sum)
 }
 
-type Moves int
+type Move int
 
 const (
-	Rock Moves = iota
+	Rock Move = iota
 	Paper
 	Scissors
 )
@@ -88,49 +88,68 @@ const (
 func day2() {
 	input := readFile("inputs/day2.txt")
 
-	var scores []int
+	var r1Scores []int
+	var r2Scores []int
 
 	for numRound, moves := range input {
+
+		// Stragey 1 appaoach
 		moves := strings.Split(moves, " ")
 		elfMove := parseMove(moves[0])
 		myMove := parseMove(moves[1])
 
-		score := 0
+		r1Res := evalRound(myMove, elfMove)
 
-		switch myMove {
-		case Rock:
-			score += 1
-		case Paper:
-			score += 2
-		case Scissors:
-			score += 3
-		}
+		r1Score := computeMoveScore(myMove) + computeRoundScore(r1Res)
+		r1Scores = append(r1Scores, r1Score)
 
-		res := evalRound(myMove, elfMove)
+		// Strategy 2 approach
+		desiredOutcome := getOutcome(moves[1])
+		desiredMove := getMoveForOutcome(desiredOutcome, elfMove)
 
-		switch res {
-		case Lost:
-			score += 0
-		case Draw:
-			score += 3
-		case Win:
-			score += 6
-		}
+		r2Res := evalRound(desiredMove, elfMove)
 
-		scores = append(scores, score)
+		r2Score := computeMoveScore(desiredMove) + computeRoundScore(r2Res)
+		r2Scores = append(r2Scores, r2Score)
 
 		println(
 			"round #", numRound,
 			"moves ", elfMove, myMove,
-			"score", score)
+			"score", r1Score)
 	}
 
-	sum := sumArray(scores)
+	sumR1 := sumArray(r1Scores)
+	sumR2 := sumArray(r2Scores)
 
-	println("total score", sum)
+	println("total score R1", sumR1)
+	println("total score R2", sumR2)
 }
 
-func parseMove(move string) Moves {
+func computeMoveScore(move Move) int {
+	switch move {
+	case Rock:
+		return 1
+	case Paper:
+		return 2
+	case Scissors:
+		return 3
+	}
+	panic(-1)
+}
+
+func computeRoundScore(res Result) int {
+	switch res {
+	case Lost:
+		return 0
+	case Draw:
+		return 3
+	case Win:
+		return 6
+	}
+	panic(-1)
+}
+
+func parseMove(move string) Move {
 	switch move {
 	case "X":
 		return Rock
@@ -146,10 +165,49 @@ func parseMove(move string) Moves {
 		return Scissors
 	}
 
-	return Rock
+	panic(-1)
 }
 
-func evalRound(me, elf Moves) Result {
+func getOutcome(outcome string) Result {
+	switch outcome {
+	case "X":
+		return Lost
+	case "Y":
+		return Draw
+	case "Z":
+		return Win
+	}
+	panic(-1)
+}
+
+func getMoveForOutcome(outcome Result, opponentMove Move) Move {
+	switch outcome {
+	case Lost:
+		switch opponentMove {
+		case Rock:
+			return Scissors
+		case Paper:
+			return Rock
+		case Scissors:
+			return Paper
+		}
+	case Draw:
+		return opponentMove
+	case Win:
+		switch opponentMove {
+		case Rock:
+			return Paper
+		case Paper:
+			return Scissors
+		case Scissors:
+			return Rock
+		}
+	}
+
+	panic(-1)
+}
+
+func evalRound(me, elf Move) Result {
 	if me == elf {
 		return Draw
 	}
