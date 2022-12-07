@@ -14,22 +14,32 @@ func check(e error) {
 	}
 }
 
-func day1() {
-	readFile, err := os.Open("input.txt")
+func readFile(path string) []string {
+	readFile, err := os.Open(path)
 	check(err)
 
 	fileScanner := bufio.NewScanner(readFile)
-
 	fileScanner.Split(bufio.ScanLines)
+
+	var lines []string
+	for fileScanner.Scan() {
+		lines = append(lines, fileScanner.Text())
+	}
+
+	readFile.Close()
+
+	return lines
+}
+
+func day1() {
+	inputLines := readFile("inputs/day1.txt")
 
 	elfCount := 0
 	elfSum := 0
 
 	var elfSums []int
 
-	for fileScanner.Scan() {
-		x := fileScanner.Text()
-
+	for _, x := range inputLines {
 		if x == "" {
 			elfSums = append(elfSums, elfSum)
 			elfSum = 0
@@ -56,8 +66,6 @@ func day1() {
 	}
 
 	fmt.Println("total", sum)
-
-	readFile.Close()
 }
 
 func main() {
