@@ -1,36 +1,11 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"sort"
 	"strconv"
 	"strings"
 )
-
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
-func readFile(path string) []string {
-	readFile, err := os.Open(path)
-	check(err)
-
-	fileScanner := bufio.NewScanner(readFile)
-	fileScanner.Split(bufio.ScanLines)
-
-	var lines []string
-	for fileScanner.Scan() {
-		lines = append(lines, fileScanner.Text())
-	}
-
-	readFile.Close()
-
-	return lines
-}
 
 func day1() {
 	inputLines := readFile("inputs/day1.txt")
@@ -237,15 +212,6 @@ func evalRound(me, elf Move) Result {
 	}
 
 	return Lost
-}
-
-func sumArray(arr []int) int {
-	sum := 0
-	for _, v := range arr {
-		sum += v
-	}
-
-	return sum
 }
 
 func main() {
