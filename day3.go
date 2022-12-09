@@ -8,13 +8,44 @@ func day3() {
 	score := 0
 
 	for _, line := range input {
-		dupe := getDuplicate(line)
-		prio := getValue(rune(dupe[0]))
+		// make sure line is even length.
+		assertDivisibleStr(line, 2)
+		firstHalf := line[0 : len(line)/2]
+		secHalf := line[len(line)/2:]
+
+		dupe := findCommon([]string{firstHalf, secHalf})
+		prio := getValue(dupe)
 
 		score += prio
 	}
 
-	println(score)
+	bInput := reshape(input, 3)
+	tokenScore := 0
+
+	for _, group := range bInput {
+		token := findCommon(group)
+		tokenScore += getValue(token)
+
+		println(string(token))
+	}
+
+	println("part1 score:", score)
+	println("part2 score:", tokenScore)
+
+}
+
+func assertDivisibleArr(items []string, mod int) {
+	len := len(items)
+	if len%mod > 0 {
+		panic("items must be divisible")
+	}
+}
+
+func assertDivisibleStr(items string, mod int) {
+	len := len(items)
+	if len%mod > 0 {
+		panic("items must be divisible")
+	}
 }
 
 func getDuplicate(items string) string {
@@ -32,6 +63,29 @@ func getDuplicate(items string) string {
 		}
 	}
 	panic("no duplicate found")
+}
+
+func findCommon(strs []string) rune {
+	if len(strs) < 2 {
+		panic("need at least 2 strings")
+	}
+
+	var unique rune
+	for _, char := range strs[0] {
+		var isCandidate bool = true
+		for _, str := range strs[1:] {
+			if !strings.ContainsRune(str, char) {
+				isCandidate = false
+				break
+			}
+		}
+		if isCandidate {
+			unique = char
+			break
+		}
+	}
+
+	return unique
 }
 
 // getValue returns the value of a character

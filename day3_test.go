@@ -26,3 +26,14 @@ func TestGetDuplicate(t *testing.T) {
 		t.Errorf("Expected %s, got %s", expected, actual)
 	}
 }
+
+func TestFindCommon(t *testing.T) {
+	input := []string{"abc", "defb", "ghib"}
+	expected := 'b'
+
+	actual := findCommon(input)
+
+	if !AreEqual(expected, actual) {
+		t.Errorf("Expected %c, got %c", expected, actual)
+	}
+}
