@@ -14,3 +14,9 @@ func check(e error) {
 		panic(e)
 	}
 }
+
+func printList(list []string) {
+	for _, v := range list {
+		println(v)
+	}
+}
