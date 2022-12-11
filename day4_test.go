@@ -13,6 +13,17 @@ func TestContains(t *testing.T) {
 	}
 }
 
+func TestOverlaps(t *testing.T) {
+	var x Span = Span{1, 5}
+	var y Span = Span{5, 8}
+	expected := true
+	actual := x.Overlaps(y)
+
+	if expected != actual {
+		t.Errorf("Expected %t, got %t", expected, actual)
+	}
+}
+
 func TestCheckContains(t *testing.T) {
 	var spans []Span = []Span{
 		{1, 5}, {2, 3},
