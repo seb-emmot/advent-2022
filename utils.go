@@ -31,3 +31,37 @@ func reshape(items []string, size int) [][]string {
 
 	return reshaped
 }
+
+type Queue[T any] struct {
+	q []T
+}
+
+func (q *Queue[T]) Push(v T) {
+	if q.q == nil {
+		q.q = make([]T, 0)
+	}
+	q.q = append(q.q, v)
+}
+
+func (q *Queue[T]) Pop() T {
+	res := q.q[0]
+	q.q = q.q[1:]
+	return res
+}
+
+type Stack[T any] struct {
+	s []T
+}
+
+func (s *Stack[T]) Push(v T) {
+	if s.s == nil {
+		s.s = make([]T, 0)
+	}
+	s.s = append(s.s, v)
+}
+
+func (s *Stack[T]) Pop() T {
+	res := s.s[len(s.s)-1]
+	s.s = s.s[:len(s.s)-1]
+	return res
+}
