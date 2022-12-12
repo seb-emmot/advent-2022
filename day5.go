@@ -17,11 +17,22 @@ func (b *Board) Add(stack int, item string) {
 	b.stacks[stack].Push(item)
 }
 
+func (b *Board) AddMany(stack int, items []string) {
+	for _, item := range items {
+		b.Add(stack, item)
+	}
+}
+
 func (b *Board) Take(stack int) string {
 	if b.stacks[stack] == nil {
 		panic("stack is empty!")
 	}
 	return b.stacks[stack].Pop()
+}
+
+func (b *Board) TakeMany(from int, num int) []string {
+	items := b.stacks[from].PopMany(num)
+	return items
 }
 
 func (b *Board) Print() {
@@ -66,11 +77,7 @@ func tryParseChar(a rune, out *string) bool {
 	return false
 }
 
-func day5() string {
-	input := readFile("inputs/day5.txt")
-
-	initial, moves := splitBy(input, "")
-
+func buildInitial(initial []string) *Board {
 	b := new(Board)
 	b.stacks = make(map[int]*Stack[string])
 
@@ -83,9 +90,11 @@ func day5() string {
 			}
 		}
 	}
-	b.Print()
-	fmt.Println()
 
+	return b
+}
+
+func stratA(b *Board, moves []string) {
 	// parse the moves
 	for _, move := range moves {
 
@@ -105,8 +114,40 @@ func day5() string {
 	}
 
 	b.Print()
-
-	return b.Top()
 }
 
-//SHQWSRBD
+func stratB(b *Board, moves []string) {
+	for _, move := range moves {
+
+		splt := strings.Split(move, " ")
+
+		num, e1 := strconv.Atoi(splt[1])
+		check(e1)
+		from, e2 := strconv.Atoi(splt[3])
+		check(e2)
+		to, e3 := strconv.Atoi(splt[5])
+		check(e3)
+
+		items := b.TakeMany(from, num)
+		b.AddMany(to, items)
+	}
+
+	fmt.Println("p2 :")
+	b.Print()
+}
+
+func day5() (string, string) {
+	input := readFile("inputs/day5.txt")
+
+	initial, moves := splitBy(input, "")
+
+	b := buildInitial(initial)
+	b.Print()
+	fmt.Println("p1")
+	stratA(b, moves)
+
+	b2 := buildInitial(initial)
+	stratB(b2, moves)
+
+	return b.Top(), b2.Top()
+}

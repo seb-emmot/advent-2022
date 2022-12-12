@@ -3,10 +3,14 @@ package main
 import "testing"
 
 func TestDay5(t *testing.T) {
-	res := day5()
+	r1, r2 := day5()
 
-	if res != "SHQWSRBDL" {
-		panic("Expected SHQWSRBDL, got " + res)
+	if r1 != "SHQWSRBDL" {
+		panic("Expected SHQWSRBDL, got " + r1)
+	}
+
+	if r2 != "CDTQZHBRS" {
+		panic("Expected CDTQZHBRS, got " + r2)
 	}
 }
 

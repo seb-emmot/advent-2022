@@ -60,8 +60,21 @@ func (s *Stack[T]) Push(v T) {
 	s.s = append(s.s, v)
 }
 
+func (s *Stack[T]) PushMany(v []T) {
+	if s.s == nil {
+		s.s = make([]T, 0)
+	}
+	s.s = append(s.s, v...)
+}
+
 func (s *Stack[T]) Pop() T {
 	res := s.s[len(s.s)-1]
 	s.s = s.s[:len(s.s)-1]
+	return res
+}
+
+func (q *Stack[T]) PopMany(num int) []T {
+	res := q.s[len(q.s)-num:]
+	q.s = q.s[:len(q.s)-num]
 	return res
 }
