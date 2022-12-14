@@ -1,7 +1,7 @@
 package main
 
 func main() {
-	input := readFile("inputs/day6.txt")
-	println("p2", day6PartOne(input))
-	println("p2", day6PartTwo(input))
+	input := readFile("inputs/day7.txt")
+	println("p2", day7PartOne(input))
+	println("p2", day7PartTwo(input))
 }
