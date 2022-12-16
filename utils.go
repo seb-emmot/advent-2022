@@ -78,3 +78,33 @@ func (q *Stack[T]) PopMany(num int) []T {
 	q.s = q.s[:len(q.s)-num]
 	return res
 }
+
+func Set[K Point](input []K) []K {
+	m := make(map[K]int)
+
+	for _, a := range input {
+		_, exist := m[a]
+		if !exist {
+			m[a] = 1
+		}
+	}
+
+	keys := []K{}
+	i := 0
+	for k := range m {
+		keys = append(keys, k)
+		i++
+	}
+
+	return keys
+}
+
+func maxArray(a []int) int {
+	max := a[0]
+	for _, x := range a {
+		if x > max {
+			max = x
+		}
+	}
+	return max
+}
