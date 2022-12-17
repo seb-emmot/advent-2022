@@ -1,6 +1,9 @@
 package main
 
-import "strings"
+import (
+	"day1/utils"
+	"strings"
+)
 
 func day3() {
 	input := readFile("inputs/day3.txt")
@@ -9,7 +12,7 @@ func day3() {
 
 	for _, line := range input {
 		// make sure line is even length.
-		assertDivisibleStr(line, 2)
+		utils.AssertDivisibleStr(line, 2)
 		firstHalf := line[0 : len(line)/2]
 		secHalf := line[len(line)/2:]
 
@@ -19,7 +22,7 @@ func day3() {
 		score += prio
 	}
 
-	bInput := reshape(input, 3)
+	bInput := utils.Reshape(input, 3)
 	tokenScore := 0
 
 	for _, group := range bInput {
@@ -32,20 +35,6 @@ func day3() {
 	println("part1 score:", score)
 	println("part2 score:", tokenScore)
 
-}
-
-func assertDivisibleArr(items []string, mod int) {
-	len := len(items)
-	if len%mod > 0 {
-		panic("items must be divisible")
-	}
-}
-
-func assertDivisibleStr(items string, mod int) {
-	len := len(items)
-	if len%mod > 0 {
-		panic("items must be divisible")
-	}
 }
 
 func getDuplicate(items string) string {

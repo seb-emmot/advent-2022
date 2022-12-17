@@ -1,18 +1,19 @@
 package main
 
 import (
+	"day1/utils"
 	"fmt"
 	"strconv"
 	"strings"
 )
 
 type Board struct {
-	stacks map[int]*Stack[string]
+	stacks map[int]*utils.Stack[string]
 }
 
 func (b *Board) Add(stack int, item string) {
 	if b.stacks[stack] == nil {
-		b.stacks[stack] = new(Stack[string])
+		b.stacks[stack] = new(utils.Stack[string])
 	}
 	b.stacks[stack].Push(item)
 }
@@ -37,14 +38,14 @@ func (b *Board) TakeMany(from int, num int) []string {
 
 func (b *Board) Print() {
 	for i := 1; i <= len(b.stacks); i++ {
-		fmt.Println(i, b.stacks[i].s)
+		fmt.Println(i, b.stacks[i].S)
 	}
 }
 
 func (b *Board) Top() string {
 	str := ""
 	for i := 1; i <= len(b.stacks); i++ {
-		stack := b.stacks[i].s
+		stack := b.stacks[i].S
 		str += stack[len(stack)-1]
 	}
 	return str
@@ -79,7 +80,7 @@ func tryParseChar(a rune, out *string) bool {
 
 func buildInitial(initial []string) *Board {
 	b := new(Board)
-	b.stacks = make(map[int]*Stack[string])
+	b.stacks = make(map[int]*utils.Stack[string])
 
 	for row := len(initial) - 1; row >= 0; row-- {
 		for col, c := range initial[row] {
@@ -101,11 +102,11 @@ func stratA(b *Board, moves []string) {
 		splt := strings.Split(move, " ")
 
 		num, e1 := strconv.Atoi(splt[1])
-		check(e1)
+		utils.Check(e1)
 		from, e2 := strconv.Atoi(splt[3])
-		check(e2)
+		utils.Check(e2)
 		to, e3 := strconv.Atoi(splt[5])
-		check(e3)
+		utils.Check(e3)
 
 		for i := 0; i < num; i++ {
 			res := b.Take(from)
@@ -122,11 +123,11 @@ func stratB(b *Board, moves []string) {
 		splt := strings.Split(move, " ")
 
 		num, e1 := strconv.Atoi(splt[1])
-		check(e1)
+		utils.Check(e1)
 		from, e2 := strconv.Atoi(splt[3])
-		check(e2)
+		utils.Check(e2)
 		to, e3 := strconv.Atoi(splt[5])
-		check(e3)
+		utils.Check(e3)
 
 		items := b.TakeMany(from, num)
 		b.AddMany(to, items)

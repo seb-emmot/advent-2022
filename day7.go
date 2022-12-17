@@ -1,6 +1,7 @@
 package main
 
 import (
+	"day1/utils"
 	"regexp"
 	"strconv"
 )
@@ -111,7 +112,7 @@ func buildDirs(input []string) *Directory {
 			match := q.FindStringSubmatch(line)
 			if match != nil {
 				size, err := strconv.Atoi(match[1])
-				check(err)
+				utils.Check(err)
 				name := match[2]
 				curDir.AddFile(name, size)
 			}

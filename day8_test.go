@@ -1,6 +1,7 @@
 package main
 
 import (
+	"day1/utils"
 	"testing"
 )
 
@@ -76,7 +77,7 @@ func TestScenicScores(t *testing.T) {
 	hm := NewHeightMap(input)
 
 	scores := hm.ScenicScores()
-	actual := maxArray(scores)
+	actual := utils.MaxArray(scores)
 	expected := 8
 
 	if actual != expected {
@@ -89,7 +90,7 @@ func TestScenicScoresFull(t *testing.T) {
 	hm := NewHeightMap(input)
 
 	scores := hm.ScenicScores()
-	actual := maxArray(scores)
+	actual := utils.MaxArray(scores)
 	expected := 440640
 
 	if actual != expected {

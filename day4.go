@@ -1,6 +1,7 @@
 package main
 
 import (
+	"day1/utils"
 	"fmt"
 	"strconv"
 	"strings"
@@ -27,8 +28,8 @@ func buildSpans(input []string) []Span {
 			a := strings.Split(q, "-")
 			min, e1 := strconv.Atoi(a[0])
 			max, e2 := strconv.Atoi(a[1])
-			check(e1)
-			check(e2)
+			utils.Check(e1)
+			utils.Check(e2)
 
 			s := Span{min, max}
 			spans = append(spans, s)

@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"day1/utils"
+	"testing"
+)
 
 func TestDay5(t *testing.T) {
 	r1, r2 := day5()
@@ -16,7 +19,7 @@ func TestDay5(t *testing.T) {
 
 func TestBoard(t *testing.T) {
 	b := new(Board)
-	b.stacks = make(map[int]*Stack[string])
+	b.stacks = make(map[int]*utils.Stack[string])
 
 	b.Add(1, "a")
 	b.Add(1, "b")

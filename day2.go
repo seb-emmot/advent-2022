@@ -1,6 +1,9 @@
 package main
 
-import "strings"
+import (
+	"day1/utils"
+	"strings"
+)
 
 type Move int
 
@@ -51,8 +54,8 @@ func day2() {
 			"score", r1Score)
 	}
 
-	sumR1 := sumArray(r1Scores)
-	sumR2 := sumArray(r2Scores)
+	sumR1 := utils.SumArray(r1Scores)
+	sumR2 := utils.SumArray(r2Scores)
 
 	println("total score R1", sumR1)
 	println("total score R2", sumR2)

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"day1/utils"
 	"strconv"
 	"strings"
 )
@@ -18,7 +19,7 @@ func NewHeightMap(input []string) *HeightMap {
 		grid[x] = make([]int, dx)
 		for y, char := range line {
 			val, err := strconv.Atoi(string(char))
-			check(err)
+			utils.Check(err)
 			grid[x][y] = val
 		}
 	}
@@ -26,13 +27,8 @@ func NewHeightMap(input []string) *HeightMap {
 	return &HeightMap{Grid: grid}
 }
 
-type Point struct {
-	X int
-	Y int
-}
-
-func (h *HeightMap) ComputeVisible() []Point {
-	visible := []Point{}
+func (h *HeightMap) ComputeVisible() []utils.Point {
+	visible := []utils.Point{}
 
 	for y := 1; y <= len(h.Grid)-2; y++ {
 		// print("checking line ", y, ". ")
@@ -42,13 +38,13 @@ func (h *HeightMap) ComputeVisible() []Point {
 		for x := 1; x <= len(row)-2; x++ {
 			leftCandidate := row[x]
 			if leftCandidate > maxLeft {
-				visible = append(visible, Point{x, y})
+				visible = append(visible, utils.Point{x, y})
 				maxLeft = leftCandidate
 				// print(leftCandidate, " visible left ")
 			}
 			rightCandidate := row[len(row)-(1+x)]
 			if rightCandidate > maxRight {
-				pt := Point{len(row) - (1 + x), y}
+				pt := utils.Point{len(row) - (1 + x), y}
 				visible = append(visible, pt)
 				maxRight = rightCandidate
 				// print(rightCandidate, " visible right ")
@@ -65,13 +61,13 @@ func (h *HeightMap) ComputeVisible() []Point {
 		for y := 1; y <= len(col)-2; y++ {
 			topCandidate := col[y]
 			if topCandidate > maxTop {
-				visible = append(visible, Point{x, y})
+				visible = append(visible, utils.Point{x, y})
 				maxTop = topCandidate
 				// print(topCandidate, " visible top ")
 			}
 			botCandidate := col[len(col)-(1+y)]
 			if botCandidate > maxBot {
-				pt := Point{x, len(col) - (1 + y)}
+				pt := utils.Point{x, len(col) - (1 + y)}
 				visible = append(visible, pt)
 				maxBot = botCandidate
 				// print(botCandidate, " visible bot ")
@@ -80,7 +76,7 @@ func (h *HeightMap) ComputeVisible() []Point {
 		// println()
 	}
 
-	x := Set(visible)
+	x := utils.Set(visible)
 	return x
 	// return len(visible)
 }
@@ -110,7 +106,7 @@ func (h *HeightMap) Print() {
 	}
 }
 
-func printBlocked(input []Point) {
+func printBlocked(input []utils.Point) {
 	maxX := 0
 	maxY := 0
 
@@ -208,7 +204,7 @@ func day8PartTwo(input []string) int {
 	hm := NewHeightMap(input)
 
 	scores := hm.ScenicScores()
-	maxScore := maxArray(scores)
+	maxScore := utils.MaxArray(scores)
 
 	return maxScore
 }

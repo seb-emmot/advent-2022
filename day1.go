@@ -1,6 +1,7 @@
 package main
 
 import (
+	"day1/utils"
 	"fmt"
 	"sort"
 	"strconv"
@@ -21,7 +22,7 @@ func day1() {
 			elfCount++
 		} else {
 			n, e := strconv.Atoi(x)
-			check(e)
+			utils.Check(e)
 
 			elfSum += n
 		}
