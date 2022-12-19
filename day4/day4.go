@@ -1,7 +1,7 @@
-package main
+package day4
 
 import (
-	"day1/utils"
+	"advent/utils"
 	"fmt"
 	"strconv"
 	"strings"
@@ -66,7 +66,7 @@ func checkOverlaps(spans []Span) []bool {
 }
 
 func day4() {
-	input := readFile("inputs/day4.txt")
+	input := utils.ReadFile("inputs/day4.txt")
 
 	spans := buildSpans(input)
 

@@ -1,3 +1,3 @@
-module day1
+module advent
 
 go 1.19

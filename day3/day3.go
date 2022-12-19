@@ -1,12 +1,12 @@
-package main
+package day3
 
 import (
-	"day1/utils"
+	"advent/utils"
 	"strings"
 )
 
 func day3() {
-	input := readFile("inputs/day3.txt")
+	input := utils.ReadFile("inputs/day3.txt")
 
 	score := 0
 

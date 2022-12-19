@@ -1,12 +1,12 @@
-package main
+package day8
 
 import (
-	"day1/utils"
+	"advent/utils"
 	"testing"
 )
 
 func TestDay8PartOne(t *testing.T) {
-	input := readFile("test_input/day8.txt")
+	input := utils.ReadFile("../test_input/day8.txt")
 
 	actual := day8PartOne(input)
 	expected := 21
@@ -17,7 +17,7 @@ func TestDay8PartOne(t *testing.T) {
 }
 
 func TestDay8PartOneFull(t *testing.T) {
-	input := readFile("inputs/day8.txt")
+	input := utils.ReadFile("../inputs/day8.txt")
 
 	actual := day8PartOne(input)
 	expected := 1787
@@ -61,7 +61,7 @@ func TestComputeVisibleVertical(t *testing.T) {
 }
 
 func TestScenicScore(t *testing.T) {
-	input := readFile("test_input/day8.txt")
+	input := utils.ReadFile("../test_input/day8.txt")
 	hm := NewHeightMap(input)
 
 	actual := hm.ScenicScore(2, 1)
@@ -73,7 +73,7 @@ func TestScenicScore(t *testing.T) {
 }
 
 func TestScenicScores(t *testing.T) {
-	input := readFile("test_input/day8.txt")
+	input := utils.ReadFile("../test_input/day8.txt")
 	hm := NewHeightMap(input)
 
 	scores := hm.ScenicScores()
@@ -86,7 +86,7 @@ func TestScenicScores(t *testing.T) {
 }
 
 func TestScenicScoresFull(t *testing.T) {
-	input := readFile("inputs/day8.txt")
+	input := utils.ReadFile("../inputs/day8.txt")
 	hm := NewHeightMap(input)
 
 	scores := hm.ScenicScores()

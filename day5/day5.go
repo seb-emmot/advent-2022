@@ -1,7 +1,7 @@
-package main
+package day5
 
 import (
-	"day1/utils"
+	"advent/utils"
 	"fmt"
 	"strconv"
 	"strings"
@@ -138,7 +138,7 @@ func stratB(b *Board, moves []string) {
 }
 
 func day5() (string, string) {
-	input := readFile("inputs/day5.txt")
+	input := utils.ReadFile("../inputs/day5.txt")
 
 	initial, moves := splitBy(input, "")
 

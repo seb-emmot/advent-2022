@@ -1,14 +1,13 @@
-package main
+package utils
 
 import (
 	"bufio"
-	"day1/utils"
 	"os"
 )
 
-func readFile(path string) []string {
+func ReadFile(path string) []string {
 	readFile, err := os.Open(path)
-	utils.Check(err)
+	Check(err)
 
 	fileScanner := bufio.NewScanner(readFile)
 	fileScanner.Split(bufio.ScanLines)

@@ -1,9 +1,12 @@
-package main
+package day7
 
-import "testing"
+import (
+	"advent/utils"
+	"testing"
+)
 
 func TestDay7PartOne(t *testing.T) {
-	input := readFile("test_input/day7test.txt")
+	input := utils.ReadFile("../test_input/day7test.txt")
 
 	actual := day7PartOne(input)
 	expected := 95437
@@ -14,7 +17,7 @@ func TestDay7PartOne(t *testing.T) {
 }
 
 func TestDay7PartTwo(t *testing.T) {
-	input := readFile("test_input/day7test.txt")
+	input := utils.ReadFile("../test_input/day7test.txt")
 
 	actual := day7PartTwo(input)
 	expected := 24933642

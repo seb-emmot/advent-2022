@@ -1,4 +1,4 @@
-package main
+package day6
 
 func containsDuplicate(str string) bool {
 	seen := make(map[string]bool)

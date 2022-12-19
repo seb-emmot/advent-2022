@@ -1,7 +1,7 @@
-package main
+package day2
 
 import (
-	"day1/utils"
+	"advent/utils"
 	"strings"
 )
 
@@ -22,7 +22,7 @@ const (
 )
 
 func day2() {
-	input := readFile("inputs/day2.txt")
+	input := utils.ReadFile("inputs/day2.txt")
 
 	var r1Scores []int
 	var r2Scores []int

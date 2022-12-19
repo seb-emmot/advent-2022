@@ -1,7 +1,7 @@
-package main
+package day8
 
 import (
-	"day1/utils"
+	"advent/utils"
 	"strconv"
 	"strings"
 )

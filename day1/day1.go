@@ -1,14 +1,14 @@
-package main
+package day1
 
 import (
-	"day1/utils"
+	"advent/utils"
 	"fmt"
 	"sort"
 	"strconv"
 )
 
 func day1() {
-	inputLines := readFile("inputs/day1.txt")
+	inputLines := utils.ReadFile("inputs/day1.txt")
 
 	elfCount := 0
 	elfSum := 0

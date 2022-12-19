@@ -1,7 +1,7 @@
-package main
+package day5
 
 import (
-	"day1/utils"
+	"advent/utils"
 	"testing"
 )
 
