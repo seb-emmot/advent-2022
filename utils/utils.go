@@ -98,7 +98,7 @@ type Point struct {
 	Y int
 }
 
-func Set[K Point](input []K) []K {
+func Set[K comparable](input []K) []K {
 	m := make(map[K]int)
 
 	for _, a := range input {
@@ -126,4 +126,12 @@ func MaxArray(a []int) int {
 		}
 	}
 	return max
+}
+
+// Abs returns the absolute value of x.
+func Abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
 }
