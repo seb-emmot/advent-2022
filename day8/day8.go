@@ -38,13 +38,13 @@ func (h *HeightMap) ComputeVisible() []utils.Point {
 		for x := 1; x <= len(row)-2; x++ {
 			leftCandidate := row[x]
 			if leftCandidate > maxLeft {
-				visible = append(visible, utils.Point{x, y})
+				visible = append(visible, utils.Point{X: x, Y: y})
 				maxLeft = leftCandidate
 				// print(leftCandidate, " visible left ")
 			}
 			rightCandidate := row[len(row)-(1+x)]
 			if rightCandidate > maxRight {
-				pt := utils.Point{len(row) - (1 + x), y}
+				pt := utils.Point{X: len(row) - (1 + x), Y: y}
 				visible = append(visible, pt)
 				maxRight = rightCandidate
 				// print(rightCandidate, " visible right ")
@@ -61,13 +61,13 @@ func (h *HeightMap) ComputeVisible() []utils.Point {
 		for y := 1; y <= len(col)-2; y++ {
 			topCandidate := col[y]
 			if topCandidate > maxTop {
-				visible = append(visible, utils.Point{x, y})
+				visible = append(visible, utils.Point{X: x, Y: y})
 				maxTop = topCandidate
 				// print(topCandidate, " visible top ")
 			}
 			botCandidate := col[len(col)-(1+y)]
 			if botCandidate > maxBot {
-				pt := utils.Point{x, len(col) - (1 + y)}
+				pt := utils.Point{X: x, Y: len(col) - (1 + y)}
 				visible = append(visible, pt)
 				maxBot = botCandidate
 				// print(botCandidate, " visible bot ")
